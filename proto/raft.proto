@@ -1,0 +1,43 @@
+syntax = "proto3";
+package raft;
+
+service Raft {
+  rpc request_vote(RequestVoteArgs) returns (RequestVoteReply);
+  rpc append_entries(AppendEntriesArgs) returns (AppendEntriesReply);
+}
+
+message RequestVoteArgs {
+    int32 term = 1;
+    int32 candidate_id = 2;
+    int32 last_log_index = 3;
+    int32 last_log_term = 4;
+}
+
+message RequestVoteReply {
+    int32 term = 1;
+    bool vote_granted = 2;
+}
+
+message AppendEntriesArgs {
+    int32 term = 1;
+    int32 leader_id = 2;
+    int32 prev_log_index = 3;
+    int32 prev_log_term = 4;
+    repeated LogEntry entries = 5;
+    int32 leader_commit = 6;
+}
+
+message AppendEntriesReply {
+    int32 term = 1;
+    bool success = 2;
+}
+
+message KeyValueCommand {
+    string key = 1;
+    string value = 2;
+}
+
+message LogEntry {
+    KeyValueCommand command = 1;
+    int32 term = 2;
+}
