@@ -1,4 +1,4 @@
-# RAFT-Rust
+# raft-rust
 
 This  is an implementation of RAFT algorithm using Rust language. Purpose of writing this 
 implementation is to thorougly understand internal working of RAFT algorithm from implementation
